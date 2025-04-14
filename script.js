@@ -1,12 +1,12 @@
 // ======= Användare ===========
 const users = [
-    { namn: "Anna", kod: "1234", saldo: 1000 },
-    { namn: "Erik", kod: "5678", saldo: 1000 }
+    { namn: "Emma", kod: "1234", saldo: 1000 },
+    { namn: "Nicklas", kod: "5678", saldo: 1000 }
   ];
   
   let inmatadKod = "";
   let inloggadAnvändare = null;
-  let display = document.getElementById("display");
+  let displayMain = document.getElementById("display");
   let userInfo = document.getElementById("user-info");
   
   let currentMode = null; // null | "deposit" | "withdraw"
@@ -14,7 +14,6 @@ const users = [
   
   // ======= Element ===========
   const numButtons = document.querySelectorAll(".num-btn");
-  const saldoBtn = document.getElementById("saldo-btn");
   const depositBtn = document.getElementById("deposit-btn");
   const withdrawBtn = document.getElementById("withdraw-btn");
   const logoutBtn = document.getElementById("logout-btn");
@@ -27,13 +26,17 @@ const users = [
     inmatadKod = "";
     beloppsInmatning = "";
     currentMode = null;
-    display.textContent = inloggadAnvändare
-      ? `Välkommen ${inloggadAnvändare.namn}`
-      : "Välkommen! Ange din kod:";
+  
+    if (inloggadAnvändare) {
+      displayMain.textContent = "Välj ett alternativ:";
+      userInfo.textContent = `Inloggad: ${inloggadAnvändare.namn} | Saldo: ${inloggadAnvändare.saldo} kr`;
+    } else {
+      displayMain.textContent = "Välkommen! Ange din kod:";
+      userInfo.textContent = "";
+    }
   }
   
   function uppdateraKnappar(aktiv) {
-    saldoBtn.disabled = !aktiv;
     depositBtn.disabled = !aktiv;
     withdrawBtn.disabled = !aktiv;
     logoutBtn.disabled = !aktiv;
@@ -41,40 +44,39 @@ const users = [
   
   function loggaIn(kod) {
     const användare = users.find(u => u.kod === kod);
+  
     if (användare) {
       inloggadAnvändare = användare;
       userInfo.textContent = användare.namn;
       uppdateraKnappar(true);
-      display.textContent = `Välkommen ${användare.namn}`;
+      reset(); // Visa välkomsttext med saldo
     } else {
-      display.textContent = "Fel kod. Försök igen.";
-      setTimeout(reset, 1500);
+      displayMain.textContent = "Fel kod. Försök igen.";
+      setTimeout(() => {
+        inmatadKod = "";
+        displayMain.textContent = "Vänligen ange din kod:";
+      }, 1500);
     }
-    inmatadKod = "";
-  }
   
-  function visaSaldo() {
-    display.textContent = `Saldo: ${inloggadAnvändare.saldo} kr`;
+    inmatadKod = "";
   }
   
   function hanteraInsättning() {
     currentMode = "deposit";
     beloppsInmatning = "";
-    display.textContent = "Ange belopp för insättning:";
+    displayMain.textContent = "Ange belopp för insättning:";
   }
   
   function hanteraUttag() {
     currentMode = "withdraw";
     beloppsInmatning = "";
-    display.textContent = "Ange belopp för uttag:";
+    displayMain.textContent = "Ange belopp för uttag:";
   }
   
   function avslutaTransaktion() {
     currentMode = null;
     beloppsInmatning = "";
-    setTimeout(() => {
-      display.textContent = `Saldo: ${inloggadAnvändare.saldo} kr`;
-    }, 1000);
+    setTimeout(reset, 1000);
   }
   
   // ======= Händelser ===========
@@ -85,14 +87,14 @@ const users = [
       if (!inloggadAnvändare) {
         if (inmatadKod.length < 4) {
           inmatadKod += siffra;
-          display.textContent = "*".repeat(inmatadKod.length);
+          displayMain.textContent = "*".repeat(inmatadKod.length);
         }
         if (inmatadKod.length === 4) {
           loggaIn(inmatadKod);
         }
       } else if (currentMode) {
         beloppsInmatning += siffra;
-        display.textContent = beloppsInmatning;
+        displayMain.textContent = beloppsInmatning;
       }
     });
   });
@@ -101,29 +103,31 @@ const users = [
     if (currentMode && beloppsInmatning) {
       let belopp = Math.floor(Number(beloppsInmatning));
       if (isNaN(belopp) || belopp <= 0) {
-        display.textContent = "Ogiltigt belopp.";
+        displayMain.textContent = "Ogiltigt belopp.";
         avslutaTransaktion();
         return;
       }
   
       if (currentMode === "deposit") {
         inloggadAnvändare.saldo += belopp;
-        display.textContent = `Insatt: ${belopp} kr`;
+        displayMain.textContent = `Insatt: ${belopp} kr`;
+        userInfo.textContent = `Inloggad: ${inloggadAnvändare.namn} | Saldo: ${inloggadAnvändare.saldo} kr`;
       }
   
       if (currentMode === "withdraw") {
         if (belopp > inloggadAnvändare.saldo) {
-          display.textContent = "Otillräckligt saldo.";
+          displayMain.textContent = "Otillräckligt saldo.";
         } else {
           inloggadAnvändare.saldo -= belopp;
-          display.textContent = `Uttag: ${belopp} kr`;
+          displayMain.textContent = `Uttag: ${belopp} kr`;
+          userInfo.textContent = `Inloggad: ${inloggadAnvändare.namn} | Saldo: ${inloggadAnvändare.saldo} kr`;
         }
       }
+  
       avslutaTransaktion();
     }
   });
   
-  saldoBtn.addEventListener("click", visaSaldo);
   depositBtn.addEventListener("click", hanteraInsättning);
   withdrawBtn.addEventListener("click", hanteraUttag);
   
@@ -139,12 +143,15 @@ const users = [
   clearBtn.addEventListener("click", () => {
     if (!inloggadAnvändare) {
       inmatadKod = "";
-      display.textContent = "Ange din kod:";
+      displayMain.textContent = "Ange din kod:";
     } else if (currentMode) {
       beloppsInmatning = "";
-      display.textContent = currentMode === "deposit"
+      displayMain.textContent = currentMode === "deposit"
         ? "Ange belopp för insättning:"
         : "Ange belopp för uttag:";
     }
   });
+  
+  // ===== Initiera läget ==========
+  window.onload = reset;
   
