@@ -1,51 +1,68 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <title>Bankomat</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="atm">
-    <div class="screen">
-      <div id="user-info"></div>  
-      <div id="display">Välkommen! Ange din kod:</div>
-    </div>
+<!-- =====================================================================
+     Bankomat v2.1 (c)2025 Nicklas Olsson
+     HTML-struktur för en interaktiv bankomat-app
+     ===================================================================== -->
 
-    <div class="keypad">
-      <!-- Rad 1 -->
-      <button class="num-btn">1</button>
-      <button class="num-btn">2</button>
-      <button class="num-btn">3</button>
-      <button id="cancel-btn">Avbryt</button>
-
-      <!-- Rad 2 -->
-      <button class="num-btn">4</button>
-      <button class="num-btn">5</button>
-      <button class="num-btn">6</button>
-      <button id="clear-btn">Rensa</button>
-
-      <!-- Rad 3 -->
-      <button class="num-btn">7</button>
-      <button class="num-btn">8</button>
-      <button class="num-btn">9</button>
-      <button id="enter-btn">Enter</button>
-
-      <!-- Rad 4 -->
-      <div></div>
-      <button class="num-btn">0</button>
-      <div></div>
-      <button id="logout-btn" disabled>Logga ut</button>
-    </div>
-
-    <!-- Funktionsknappar -->
-    <div class="actions">
-      <!--<button id="saldo-btn" disabled>Visa saldo</button>-->
-      <button id="deposit-btn" disabled>Insättning</button>
-      <button id="withdraw-btn" disabled>Uttag</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+     <!DOCTYPE html>
+     <html lang="sv"> <!-- Anger att språket på sidan är svenska -->
+     <head>
+       <meta charset="UTF-8"> <!-- Ser till att åäö och andra specialtecken visas rätt -->
+       <title>Bankomat</title> <!-- Texten som visas i fliken -->
+       <link rel="stylesheet" href="style.css"> <!-- Länkar till extern CSS-stilmall -->
+     </head>
+     
+     <body>
+       <!-- Huvudbehållare för bankomaten -->
+       <div class="atm">
+         
+         <!-- Skärmområde: visar meddelanden och användarinformation -->
+         <div class="screen">
+           <!-- Här visas användarens namn + saldo efter inloggning -->
+           <div id="user-info"></div>  
+     
+           <!-- Här visas aktuell status eller instruktioner till användaren -->
+           <div id="display">Välkommen! Ange din kod:</div>
+         </div>
+     
+         <!-- Knappsatsen (nummer + specialknappar) -->
+         <div class="keypad">
+           <!-- ========= Rad 1 ========= -->
+           <button class="num-btn">1</button> <!-- Siffra 1 -->
+           <button class="num-btn">2</button> <!-- Siffra 2 -->
+           <button class="num-btn">3</button> <!-- Siffra 3 -->
+           <button id="cancel-btn">Avbryt</button> <!-- Avbryter och återställer inmatning -->
+     
+           <!-- ========= Rad 2 ========= -->
+           <button class="num-btn">4</button> <!-- Siffra 4 -->
+           <button class="num-btn">5</button> <!-- Siffra 5 -->
+           <button class="num-btn">6</button> <!-- Siffra 6 -->
+           <button id="clear-btn">Rensa</button> <!-- Tar bort pågående inmatning -->
+     
+           <!-- ========= Rad 3 ========= -->
+           <button class="num-btn">7</button> <!-- Siffra 7 -->
+           <button class="num-btn">8</button> <!-- Siffra 8 -->
+           <button class="num-btn">9</button> <!-- Siffra 9 -->
+           <button id="enter-btn">Enter</button> <!-- Bekräftar inmatning (kod eller belopp) -->
+     
+           <!-- ========= Rad 4 ========= -->
+           <div></div> <!-- Tom ruta för att skapa mellanrum (layout-formatering) -->
+           <button class="num-btn">0</button> <!-- Siffra 0 -->
+           <div></div> <!-- Tom ruta för symmetri -->
+           <button id="logout-btn" disabled>Logga ut</button> <!-- Loggar ut användaren, ej klickbar innan inloggning -->
+         </div>
+     
+         <!-- Sektionsknappar för insättning/uttag -->
+         <div class="actions">
+           <!-- Saldo-knapp (kommenterad bort, finns ej aktiv i denna version) -->
+           <!--<button id="saldo-btn" disabled>Visa saldo</button>-->
+     
+           <button id="deposit-btn" disabled>Insättning</button> <!-- Startar insättning (aktiveras efter inloggning) -->
+           <button id="withdraw-btn" disabled>Uttag</button> <!-- Startar uttag (aktiveras efter inloggning) -->
+         </div>
+       </div>
+     
+       <!-- Laddar JavaScript-filen sist för att allt i DOM:en ska finnas först -->
+       <script src="script.js"></script>
+     </body>
+     </html>
+     

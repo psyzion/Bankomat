@@ -1,104 +1,118 @@
+/* =====================================================================
+// Bankomat v2.1 (c)2025 Nicklas Olsson
+// Stilark för bankomatens utseende och layout
+// =====================================================================*/
+
+/* ===== Grundinställningar för hela sidan ===== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .atm {
-    background-color: #d3d3d3;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    width: 320px;
-  }
-  
-  .screen {
-    background-color: #000;
-    color: #0f0;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 16px;
-    text-align: center;
-  }
-  
-  .keypad {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-  }
-  
-  .keypad button {
-    padding: 20px 0;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 2px solid #888;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    box-shadow: inset 0 0 5px #aaa;
-    transition: background 0.2s;
-  }
-  
-  .keypad button:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-  
-  .keypad button:hover:not(:disabled) {
-    background-color: #ddd;
-  }
-  
-  /* Specialfärger för kontrollknappar */
-  #cancel-btn {
-    background-color: red;
-    color: white;
-  }
-  
-  #clear-btn {
-    background-color: yellow;
-  }
-  
-  #enter-btn {
-    background-color: green;
-    color: white;
-  }
-  
-  /* Stil för insättning, uttag -knappar */
-  .actions {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .actions button {
-    flex: 1;
-    margin: 0 5px;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: #ccc;
-    border: 2px solid #888;
-    box-shadow: inset 0 0 5px #aaa;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  
-  .actions button:hover:not(:disabled) {
-    background-color: #bbb;
-  }
-  
-  .actions button:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-  
+    font-family: Arial, sans-serif;            /* Välj ett lättläst typsnitt (Arial) för all text på sidan */
+    background-color: #e0e0e0;                 /* Ljusgrå bakgrundsfärg på hela webbsidan */
+    display: flex;                             /* Använder Flexbox för att enkelt centrera innehållet */
+    justify-content: center;                   /* Horisontell centrering av bankomaten */
+    align-items: center;                       /* Vertikal centrering av bankomaten */
+    height: 100vh;                             /* Sätt höjden till 100% av viewporten (hela skärmen) */
+    margin: 0;                                 /* Ta bort eventuell standardmarginal */
+}
+
+/* ===== Huvudbehållaren för bankomaten ===== */
+.atm {
+    background-color: #d3d3d3;                 /* Ljusgrå färg för att imitera plast/metallkänsla */
+    padding: 20px;                             /* Luft runt innehållet */
+    border-radius: 15px;                       /* Runda hörn för en mjuk design */
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);      /* Lätt skugga runt ATM för att skapa djup */
+    width: 320px;                              /* Fast bredd så att allt får plats snyggt */
+}
+
+/* ===== Skärmen på bankomaten ===== */
+.screen {
+    background-color: #000;                    /* Svart bakgrund som en riktig skärm */
+    color: #0f0;                               /* Neongrön text för en retro digital look */
+    padding: 10px;                             /* Luft inuti skärmen */
+    margin-bottom: 15px;                       /* Avstånd nedåt mot knapparna */
+    border-radius: 5px;                        /* Lite runda hörn för skärmen */
+    height: 60px;                              /* Fast höjd så innehåll inte hoppar */
+    display: flex;                             /* Flexbox för att centrera texten */
+    flex-direction: column;                    /* Säkerställ att det går att lägga till flera rader */
+    justify-content: center;                   /* Vertikal centrering av text */
+    font-size: 16px;                           /* Textstorlek som är lätt att läsa */
+    text-align: center;                        /* Centrera texten horisontellt */
+}
+
+/* ===== Layout för knappsatsen ===== */
+.keypad {
+    display: grid;                             /* Använd CSS Grid för att placera knappar i rutmönster */
+    grid-template-columns: repeat(4, 1fr);     /* Fyra kolumner med lika storlek */
+    gap: 10px;                                 /* Mellanrum mellan knapparna */
+}
+
+/* ===== Standardstil för alla knappar ===== */
+.keypad button {
+    padding: 20px 0;                           /* Mycket höjd, ingen horisontell padding */
+    font-size: 18px;                           /* Större text för bättre läsbarhet */
+    font-weight: bold;                         /* Tydligare siffror */
+    border-radius: 5px;                        /* Runda hörn */
+    border: 2px solid #888;                    /* Tunn mörkgrå kant runt knappar */
+    background-color: #f0f0f0;                 /* Ljus bakgrund på knappen */
+    cursor: pointer;                           /* Förändra muspekaren till "hand" */
+    box-shadow: inset 0 0 5px #aaa;            /* Inre skugga för 3D-effekt */
+    transition: background 0.2s;               /* Mjuk övergång när man hovrar över knappen */
+}
+
+/* ===== Stil för knappar som är avstängda ===== */
+.keypad button:disabled {
+    opacity: 0.3;                              /* Gör knappen halvt genomskinlig för att visa att den inte är aktiv */
+    cursor: not-allowed;                       /* Ändrar muspekaren till en "förbjudet"-symbol */
+}
+
+/* ===== Hover-effekt för knappar som inte är avstängda ===== */
+.keypad button:hover:not(:disabled) {
+    background-color: #ddd;                    /* Gör knappen lite mörkare vid hover */
+}
+
+/* ===== Speciella färger för kontrollknappar ===== */
+#cancel-btn {
+    background-color: red;                     /* Röd knapp för avbryt – klassiskt alarmerande */
+    color: white;                              /* Vit text för bra kontrast mot rött */
+}
+
+#clear-btn {
+    background-color: yellow;                  /* Gul knapp för "rensa" – drar uppmärksamhet */
+}
+
+#enter-btn {
+    background-color: green;                   /* Grön knapp för "enter" – signalerar "OK" eller "fortsätt" */
+    color: white;                              /* Vit text för att synas på grön bakgrund */
+}
+
+/* ===== Behållare för funktionsknappar som insättning/uttag ===== */
+.actions {
+    margin-top: 15px;                          /* Avstånd uppåt från knappsatsen */
+    display: flex;                             /* Lägg knapparna i en horisontell rad */
+    justify-content: space-between;            /* Lägg dem jämnt utspritt i raden */
+}
+
+/* ===== Stil för varje funktionsknapp ===== */
+.actions button {
+    flex: 1;                                   /* Alla knappar får lika mycket plats */
+    margin: 0 5px;                             /* Lite mellanrum mellan knapparna */
+    padding: 10px;                             /* Luft runt texten */
+    font-size: 16px;                           /* Lagom storlek för texten */
+    font-weight: bold;                         /* Gör texten mer framträdande */
+    border-radius: 5px;                        /* Runda hörn för designen */
+    background-color: #ccc;                    /* Neutral bakgrundsfärg */
+    border: 2px solid #888;                    /* Tunn kant som matchar övriga knappar */
+    box-shadow: inset 0 0 5px #aaa;            /* Inre skugga för att ge djup */
+    cursor: pointer;                           /* Handpekare för klickbarhet */
+    transition: background 0.2s;               /* Mjuk färgövergång vid hover */
+}
+
+/* ===== Hover-effekt för funktionsknappar ===== */
+.actions button:hover:not(:disabled) {
+    background-color: #bbb;                    /* Gör knappen lite mörkare vid hover */
+}
+
+/* ===== Stil för avstängda funktionsknappar ===== */
+.actions button:disabled {
+    opacity: 0.3;                              /* Gör dem bleka och otydliga */
+    cursor: not-allowed;                       /* Visar att klick inte är tillåtet */
+}
