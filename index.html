@@ -1,5 +1,5 @@
 <!-- =====================================================================
-     Bankomat v2.1 (c)2025 Nicklas Olsson
+     Bankomat v1.2 (c)2025 Nicklas Olsson
      HTML-struktur för en interaktiv bankomat-app
      ===================================================================== -->
 
@@ -22,6 +22,8 @@
      
            <!-- Här visas aktuell status eller instruktioner till användaren -->
            <div id="display">Välkommen! Ange din kod:</div>
+
+           
          </div>
      
          <!-- Knappsatsen (nummer + specialknappar) -->
@@ -61,6 +63,35 @@
          </div>
        </div>
      
+           <!-- Adminpanel inuti bankomaten -->
+    <div id="admin-panel" style="display:none;">
+        <h2>ADMINLÄGE</h2>
+        <form id="add-user-form">
+          <input type="text" name="namn" placeholder="Namn" required />
+          <input type="text" name="kod" placeholder="Kod (4 siffror)" required />
+          <input type="number" name="saldo" placeholder="Startsaldo" required />
+          <label>
+            <input type="checkbox" name="admin" />
+            Admin
+          </label>
+          <button type="submit">Lägg till användare</button>
+        </form>
+        <h3>Användare:</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Namn</th>
+              <th>Kod</th>
+              <th>Saldo</th>
+              <th>Admin</th>
+              <th>Ta bort</th>
+            </tr>
+          </thead>
+          <tbody id="user-table"></tbody>
+        </table>
+      </div>
+    </div>
+    
        <!-- Laddar JavaScript-filen sist för att allt i DOM:en ska finnas först -->
        <script src="script.js"></script>
      </body>

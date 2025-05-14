@@ -1,5 +1,5 @@
 /* =====================================================================
-// Bankomat v2.1 (c)2025 Nicklas Olsson
+// Bankomat v1.2 (c)2025 Nicklas Olsson
 // Stilark för bankomatens utseende och layout
 // =====================================================================*/
 
@@ -30,7 +30,7 @@ body {
     padding: 10px;                             /* Luft inuti skärmen */
     margin-bottom: 15px;                       /* Avstånd nedåt mot knapparna */
     border-radius: 5px;                        /* Lite runda hörn för skärmen */
-    height: 60px;                              /* Fast höjd så innehåll inte hoppar */
+    min-height: 100px;                          /* Höjd */
     display: flex;                             /* Flexbox för att centrera texten */
     flex-direction: column;                    /* Säkerställ att det går att lägga till flera rader */
     justify-content: center;                   /* Vertikal centrering av text */
@@ -108,7 +108,8 @@ body {
 
 /* ===== Hover-effekt för funktionsknappar ===== */
 .actions button:hover:not(:disabled) {
-    background-color: #bbb;                    /* Gör knappen lite mörkare vid hover */
+    background-color: #bbb;                     /*Gör knappen lite mörkare vid hover */
+
 }
 
 /* ===== Stil för avstängda funktionsknappar ===== */
@@ -116,3 +117,51 @@ body {
     opacity: 0.3;                              /* Gör dem bleka och otydliga */
     cursor: not-allowed;                       /* Visar att klick inte är tillåtet */
 }
+
+#logout-btn {
+    background: #cc0000;
+    color: white;
+  }
+
+  #admin-panel {
+    background-color: #222;       /* Samma mörka bakgrund som bankomaten */
+    color: #0f0;                  /* Grön text likt displayen */
+    border: 2px solid #0f0;       /* Grön ram */
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 1em;
+    font-family: monospace;       /* Samma typsnitt som display */
+  }
+  
+  #admin-panel h3, #admin-panel label, #admin-panel td {
+    color: #0f0;                  /* Grön text i hela panelen */
+  }
+  
+  #admin-panel input, #admin-panel button, #admin-panel select {
+    background-color: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    padding: 0.5em;
+    margin: 0.2em 0;
+    border-radius: 5px;
+  }
+  
+  #admin-panel table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 1em;
+  }
+  
+  #admin-panel td, #admin-panel th {
+    border: 1px solid #0f0;
+    padding: 0.3em;
+    text-align: left;
+  }
+  
+  #admin-panel button:hover {
+    background-color: #0f0;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  
