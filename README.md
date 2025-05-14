@@ -49,6 +49,7 @@ Detta är en interaktiv bankomatsimulator skapad i JavaScript, HTML och CSS. Pro
 Kolla in projektet live eller bidra själv:
 
 👉 https://github.com/psyzion/bankomat
+   https://psyzion.github.io/Bankomat/
 
 ---
 
